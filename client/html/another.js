@@ -1,5 +1,5 @@
-const socket = io("http://localhost:3000");
-const userNamespace = io("http://localhost:3000/user", {
+const socket = io("http://localhost:80");
+const userNamespace = io("http://localhost:80/user", {
   auth: { token: "Test" },
 });
 
