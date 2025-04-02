@@ -8,7 +8,7 @@ server = http.createServer(app);
 const io = require("socket.io");
 realServer = new io.Server(server, {
   cors: {
-    origin: ["http://127.0.0.1:5500", "https://admin.socket.io"],
+    origin: ["http://localhost", "https://admin.socket.io"],
     credentials: true,
   },
   // allowRequest: (req, callback) => {
