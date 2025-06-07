@@ -8,14 +8,15 @@ server = http.createServer(app);
 const io = require("socket.io");
 realServer = new io.Server(server, {
   cors: {
-    origin: ["http://localhost", "https://admin.socket.io"],
+    origin: "*",
+    // ["http://localhost", "https://admin.socket.io"]
     credentials: true,
   },
   // allowRequest: (req, callback) => {
   //   console.log(req.headers.host, req.headers.origin);
   //   const noOriginHeader = req.headers.host === "localhost:0";
   //   callback(null, noOriginHeader);
-  // },
+  // }, 
 });
 console.log("salom");
 
@@ -24,6 +25,7 @@ userNamespace.on("connection", (socket) => {
   console.log(socket.username);
   console.log("connected user with " + socket.username);
 });
+
 userNamespace.use((socket, next) => {
   console.log(socket.handshake.auth.token);
   if (socket.handshake.auth.token) {
@@ -69,4 +71,6 @@ realServer.on("connection", (socket) => {
 });
 
 instrument(realServer, { auth: false, mode: "development" });
-server.listen(3000);
+server.listen(3000, () => {
+  console.log("Server running on 3000")
+});
